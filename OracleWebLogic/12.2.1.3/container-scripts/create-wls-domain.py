@@ -95,8 +95,8 @@ writeDomain(domain_path)
 closeTemplate()
 
 #####################################################################################
-#import datasource config, get from https://github.com/oracle/docker-images.
-#cat OracleWebLogic/samples/1221-domain-with-resources/container-scripts/ds-deploy.py
+#import datasource config, get from https://github.com/oracle/docker-images
+#path: OracleWebLogic/samples/1221-domain-with-resources/container-scripts/ds-deploy.py
 
 # Read Domain in Offline Mode
 # ===========================

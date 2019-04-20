@@ -49,7 +49,7 @@ RUN mkdir -p /u01 && \
 
 # Copy scripts
 #-------------
-COPY container-scripts/createAndStartEmptyDomain.sh container-scripts/create-wls-domain.py container-scripts/datasource.properties /u01/oracle/
+COPY container-scripts/createAndStartEmptyDomain.sh container-scripts/create-wls-domain.py /u01/oracle/
 
 # Domain and Server environment variables
 # ------------------------------------------------------------
