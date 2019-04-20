@@ -35,7 +35,7 @@ dsname			= os.environ.get('DSNAME', 'chinainsuranceDataSource')
 dsdbname		= os.environ.get('DSDBNAME', 'dedicated')
 dsjndiname		= os.environ.get('DSJNDINAME', 'chinainsuranceDataSource')
 dsdriver		= os.environ.get('DSDRIVER', 'oracle.jdbc.OracleDriver')
-dsurl			= 'jdbc:oracle:thin:@//' + os.environ.get('DB_HOST', '10.0.105.114:3526:TPI3hx19')
+dsurl			= 'jdbc:oracle:thin:@' + os.environ.get('DB_HOST', '10.0.105.114:3526:TPI3hx19')
 dsusername		= os.environ.get('DS_USERNAME', 'tpprod')
 dspassword		= os.environ.get('DS_PASSWORD', 'nineteen@19')
 
@@ -48,7 +48,7 @@ print('dsdriver      : [%s]' %  dsdriver);
 print('dsurl         : [%s]' %  dsurl);
 print('dsusername    : [%s]' %  dsusername);
 print('dspassword    : [%s]' %  dspassword);
-
+print ""
 
 # Open default domain template
 # ============================
