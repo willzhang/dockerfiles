@@ -11,7 +11,6 @@ ENV JAVA_PKG=jdk-6u45-linux-x64.bin \
 
 ADD $JAVA_PKG /usr/java/
 
-
 RUN cd /usr/java/ && \
     chmod +x /usr/java/$JAVA_PKG && \
     sh $JAVA_PKG && \
