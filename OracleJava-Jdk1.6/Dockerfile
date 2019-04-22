@@ -2,6 +2,9 @@
 #
 # Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
 #
+#
+FROM willdockerhub/alpine-storage:3.9
+
 FROM oraclelinux:7-slim
 
 MAINTAINER Aurelio Garcia-Ribeyro <aurelio.garciaribeyro@oracle.com>
@@ -9,7 +12,7 @@ MAINTAINER Aurelio Garcia-Ribeyro <aurelio.garciaribeyro@oracle.com>
 ENV JAVA_PKG=jdk-6u45-linux-x64.bin \
     JAVA_HOME=/usr/java/default
 
-ADD $JAVA_PKG /usr/java/
+COPY --from=0 /$JAVA_PKG /usr/java/
 
 RUN cd /usr/java/ && \
     chmod +x /usr/java/$JAVA_PKG && \
