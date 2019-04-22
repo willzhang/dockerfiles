@@ -4,7 +4,10 @@ MAINTAINER wise2c <admin@wise2c.com>
 
 USER root
 
-COPY jdk-6u45-linux-x64.bin wls1036_generic.jar wls-silent.xml entrypoint.sh create-wls-domain.py /
+ENV JAVA_PKG=jdk-6u45-linux-x64.bin \
+    FMW_PKG=wls1036_generic.jar
+
+ADD $JAVA_PKG $FMW_PKG container-scripts/* /
 
 RUN curl -o /etc/yum.repos.d/Centos-6.repo http://mirrors.aliyun.com/repo/Centos-6.repo \
     && sed -i "s;\$releasever;6;g" /etc/yum.repos.d/Centos-6.repo \
