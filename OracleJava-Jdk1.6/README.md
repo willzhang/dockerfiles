@@ -1,3 +1,3 @@
 # docker-images
 
-docker images for oracleweblogic jdk1.6.045 include a single domain and datasource.
+docker images for oracle-jdk-6u45.
