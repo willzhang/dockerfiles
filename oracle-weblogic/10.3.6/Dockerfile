@@ -7,8 +7,7 @@ RUN yum update -y \
     && yum reinstall -y glibc-common \
     && yum clean all && rm -rf /tmp/* rm -rf /var/cache/yum/* \
     && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 \
-    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo 'Asia/Shanghai' >/etc/timezone
+    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 ENV LANG=zh_CN.UTF-8 \
     LANGUAGE=zh_CN:zh \
@@ -34,7 +33,7 @@ RUN cd /usr/java/ && \
 ADD $FMW_PKG container-scripts/* /
 
 RUN chmod +x /entrypoint.sh \
-    && java -jar wls1036_generic.jar -mode=silent -silent_xml=/wls-silent.xml \
+    && java -jar $FMW_PKG -mode=silent -silent_xml=/wls-silent.xml \
     && rm $FMW_PKG wls-silent.xml
 
 ENV PATH=$PATH:$JAVA_HOME/bin:/root/Oracle/Middleware/wlserver_10.3/common/bin:/root/Oracle/Middleware/user_projects/domains/base_domain/bin \

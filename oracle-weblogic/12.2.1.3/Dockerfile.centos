@@ -27,7 +27,7 @@
 # Pull base image
 # From the Oracle Registry
 # -------------------------
-FROM store/oracle/serverjre:8
+FROM willdockerhub/oracle-java:serverjre8
 
 # Maintainer
 # ----------
@@ -37,7 +37,6 @@ MAINTAINER Monica Riccelli <monica.riccelli@oracle.com>
 # --------------------------------------------------------------------
 RUN yum install -y kde-l10n-Chinese \
     && yum reinstall -y glibc-common \
-    && yum install -y vim \
     && yum clean all && rm -rf /tmp/* rm -rf /var/cache/yum/* \
     && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
