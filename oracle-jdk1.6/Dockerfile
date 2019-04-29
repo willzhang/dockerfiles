@@ -1,7 +1,7 @@
 #get jdk-6u45-linux-x64.bin
 FROM willdockerhub/alpine-storage:3.9
 
-FROM oraclelinux:7-slim
+FROM centos:7.6.1810
 
 MAINTAINER Aurelio Garcia-Ribeyro <aurelio.garciaribeyro@oracle.com>
 

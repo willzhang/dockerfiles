@@ -39,6 +39,7 @@ mkdir -p $ORACLE_HOME/properties
 # Create Domain only if 1st execution
 if [ $ADD_DOMAIN -eq 0 ]; then
    PROPERTIES_FILE=/u01/oracle/properties/domain.properties
+   source $CONFIG_FILE
    if [ ! -e "$PROPERTIES_FILE" ]; then
       echo "A properties file with the username and password needs to be supplied."
       exit

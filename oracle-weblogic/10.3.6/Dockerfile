@@ -1,40 +1,45 @@
-FROM registry.access.redhat.com/rhel6.5:latest
+FROM centos:7.6.1810
 
-MAINTAINER wise2c <admin@wise2c.com>
+LABEL MAINTAINER wise2c <admin@wise2c.com>
 
-USER root
-
-ENV JAVA_PKG=jdk-6u45-linux-x64.bin \
-    FMW_PKG=wls1036_generic.jar
-
-ADD $JAVA_PKG $FMW_PKG container-scripts/* /
-
-RUN curl -o /etc/yum.repos.d/Centos-6.repo http://mirrors.aliyun.com/repo/Centos-6.repo \
-    && sed -i "s;\$releasever;6;g" /etc/yum.repos.d/Centos-6.repo \
-    && yum update -y \
-    && yum install -y kde-l10n-Chinese glibc-common \
-    && localedef -i zh_CN -f GB18030 zh_CN.GB18030 \
-    && echo LANG="zh_CN.GB18030" > /etc/locale.conf \
+RUN yum update -y \
+    && yum install -y kde-l10n-Chinese \
+    && yum reinstall -y glibc-common \
+    && yum clean all && rm -rf /tmp/* rm -rf /var/cache/yum/* \
+    && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo 'Asia/Shanghai' >/etc/timezone \
-    && yum clean all
+    && echo 'Asia/Shanghai' >/etc/timezone
+
+ENV LANG=zh_CN.UTF-8 \
+    LANGUAGE=zh_CN:zh \
+    LC_ALL=zh_CN.UTF-8 \
+    LC_CTYPE=zh_CN.UTF-8 \
+    JAVA_PKG=jdk-6u45-linux-x64.bin \
+    FMW_PKG=wls1036_generic.jar \
+    JAVA_HOME=/usr/java/default
+
+ADD $JAVA_PKG /usr/java/
+
+RUN cd /usr/java/ && \
+    chmod +x /usr/java/$JAVA_PKG && \
+    sh $JAVA_PKG && \
+    rm $JAVA_PKG && \
+    export JAVA_DIR=$(ls -1 -d /usr/java/*) && \
+    ln -s $JAVA_DIR /usr/java/latest && \
+    ln -s $JAVA_DIR /usr/java/default && \
+    alternatives --install /usr/bin/java java $JAVA_DIR/bin/java 20000 && \
+    alternatives --install /usr/bin/javac javac $JAVA_DIR/bin/javac 20000 && \
+    alternatives --install /usr/bin/jar jar $JAVA_DIR/bin/jar 20000
+
+ADD $FMW_PKG container-scripts/* /
 
 RUN chmod +x /entrypoint.sh \
-    && chmod +x /jdk-6u45-linux-x64.bin \
-    && ./jdk-6u45-linux-x64.bin \
-    && mkdir /usr/java \
-    && mv ./jdk1.6.0_45 /usr/java/ \
-    && /usr/java/jdk1.6.0_45/bin/java -jar wls1036_generic.jar -mode=silent -silent_xml=/wls-silent.xml \
-    && rm jdk-6u45-linux-x64.bin wls1036_generic.jar wls-silent.xml
+    && java -jar wls1036_generic.jar -mode=silent -silent_xml=/wls-silent.xml \
+    && rm $FMW_PKG wls-silent.xml
 
-ENV LANG=zh_CN.GB18030 \
-    LC_ALL=zh_CN.GB18030 \
-    JAVA_HOME=/usr/java/jdk1.6.0_45 \
-    JRE_HOME=/usr/java/jdk1.6.0_45/jre \
-    CLASSPATH=".:/usr/java/jdk1.6.0_45/lib/dt.jar:/usr/java/jdk1.6.0_45/lib/tools.jar"  \
-    PATH=$PATH:$JAVA_HOME/bin:/root/Oracle/Middleware/wlserver_10.3/common/bin:/root/Oracle/Middleware/user_projects/domains/base_domain/bin \
+ENV PATH=$PATH:$JAVA_HOME/bin:/root/Oracle/Middleware/wlserver_10.3/common/bin:/root/Oracle/Middleware/user_projects/domains/base_domain/bin \
     CONFIG_JVM_ARGS='-Djava.security.egd=file:/dev/./urandom'
 
 WORKDIR /root/Oracle/Middleware
 
-CMD source entrypoint.sh
+CMD source /entrypoint.sh
