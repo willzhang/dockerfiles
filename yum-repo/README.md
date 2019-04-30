@@ -6,7 +6,7 @@
 docker run -d -p 2009:2009 --name=yum-repo willdockerhub/yum-repo:v1.0
 docker cp yum-repo:/usr/share/nginx/html/rpms /root
 ```
-复制整个rpms目录到离线环境，配置本地yum源,注意/root/rpms为rpms目录绝对路径：
+复制整个rpms目录到离线环境，配置本地yum源, 注意/root/rpms为rpms目录绝对路径：
 ```
 cat >> /etc/yum.repo.d/local.repo << EOF
 [local]
