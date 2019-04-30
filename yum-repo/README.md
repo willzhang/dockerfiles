@@ -1,6 +1,6 @@
-# Yum Repo for createrepo、docker-ce-18.06、docker-compose
+#### Yum Repo for createrepo、docker-ce-18.06、docker-compose
 
-# 未安装docker情况下使用本yum源
+### 未安装docker情况下使用本yum源
 在线环境取出镜像中的离线包
 docker pull willdockerhub/yum-repo:v1.0
 docker cp willdockerhub/yum-repo:v1.0:/usr/share/nginx/html/rpms /root
@@ -16,7 +16,7 @@ gpgcheck=0
 然后就可以直接用yum install命令命令安装相关软件了。例如：
 yum install docker docker-compose
 
-# 已安装docker情况下使用本yum源
+#### 已安装docker情况下使用本yum源
 
 YUM Repo服务器安装好docker，直接运行命令：
 
