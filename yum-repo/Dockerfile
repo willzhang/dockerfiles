@@ -28,13 +28,13 @@ RUN mkdir /rpms \
     && yum-config-manager --add-repo $DOCKER_REPO \
     && yum install -y --downloadonly --downloaddir=/rpms $(cat /pkg.list)
 
-COPY --from=build0 /rpms/* /rpms
-COPY --from=build1 /rpms/* /rpms
-RUN yum install -y createpreo && createrepo /rpms	
+COPY --from=build0 /rpms/* /rpms/
+COPY --from=build1 /rpms/* /rpms/
+RUN yum install -y createpreo && createrepo /rpms/	
 
 #########################################################################################	
 FROM nginx:alpine
 RUN mkdir /usr/share/nginx/html/rpms
-COPY --from=build2 /rpms/* /usr/share/nginx/html/rpms
-COPY index.html /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build2 /rpms/* /usr/share/nginx/html/rpms/
+COPY index.html /usr/share/nginx/html/
+COPY nginx.conf /etc/nginx/conf.d/default.conf/
