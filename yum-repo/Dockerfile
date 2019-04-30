@@ -36,5 +36,5 @@ RUN createrepo /rpms/
 FROM nginx:alpine
 RUN mkdir /usr/share/nginx/html/rpms
 COPY --from=build2 /rpms/* /usr/share/nginx/html/rpms/
-COPY index.html /usr/share/nginx/html/
-COPY nginx.conf /etc/nginx/conf.d/default.conf/
+COPY yum-repo/index.html /usr/share/nginx/html/
+COPY yum-repo/nginx.conf /etc/nginx/conf.d/default.conf/
