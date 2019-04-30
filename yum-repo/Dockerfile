@@ -24,13 +24,13 @@ ENV EPEL_RELEASE=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noa
     DOCKER_REPO=https://download.docker.com/linux/centos/docker-ce.repo
 COPY yum-repo/pkg.list /
 RUN mkdir /rpms \
-    && yum install -y $EPEL_RELEASE yum-utils \
+    && yum install -y $EPEL_RELEASE yum-utils createrepo \
     && yum-config-manager --add-repo $DOCKER_REPO \
     && yum install -y --downloadonly --downloaddir=/rpms $(cat /pkg.list)
 
 COPY --from=build0 /rpms/* /rpms/
 COPY --from=build1 /rpms/* /rpms/
-RUN yum install -y createpreo && createrepo /rpms/	
+RUN createrepo /rpms/	
 
 #########################################################################################	
 FROM nginx:alpine
