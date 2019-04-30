@@ -2,8 +2,10 @@
 
 ### 未安装docker情况下使用本yum源
 在线环境取出镜像中的离线包
+```
 docker pull willdockerhub/yum-repo:v1.0
 docker cp willdockerhub/yum-repo:v1.0:/usr/share/nginx/html/rpms /root
+```
 复制整个rpms目录到离线环境，配置本地yum源
 ```
 cat >> /etc/yum.repo.d/local.repo << EOF
