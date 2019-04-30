@@ -2,7 +2,7 @@
 FROM centos:7.4.1708 as build0
 ENV EPEL_RELEASE=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
     DOCKER_REPO=https://download.docker.com/linux/centos/docker-ce.repo
-COPY pkg.list /
+COPY ./pkg.list /
 RUN mkdir /rpms \
     && yum install -y $EPEL_RELEASE yum-utils \
     && yum-config-manager --add-repo $DOCKER_REPO \
@@ -12,7 +12,7 @@ RUN mkdir /rpms \
 FROM centos:7.5.1804 as build1
 ENV EPEL_RELEASE=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
     DOCKER_REPO=https://download.docker.com/linux/centos/docker-ce.repo
-COPY pkg.list /
+COPY ./pkg.list /
 RUN mkdir /rpms \
     && yum install -y $EPEL_RELEASE yum-utils \
     && yum-config-manager --add-repo $DOCKER_REPO \
@@ -22,7 +22,7 @@ RUN mkdir /rpms \
 FROM centos:7.6.1810 as build2
 ENV EPEL_RELEASE=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
     DOCKER_REPO=https://download.docker.com/linux/centos/docker-ce.repo
-COPY pkg.list /
+COPY ./pkg.list /
 RUN mkdir /rpms \
     && yum install -y $EPEL_RELEASE yum-utils \
     && yum-config-manager --add-repo $DOCKER_REPO \
