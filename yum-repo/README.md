@@ -21,8 +21,9 @@ yum install docker docker-compose
 #### 已安装docker情况下使用本yum源
 
 YUM Repo服务器安装好docker，直接运行命令：
-
+```
 docker run -d -p 2009:2009 --name=yum-repo willdockerhub/yum-repo:v1.0
+```
 
 在需要安装docker的其它主机上：
 
