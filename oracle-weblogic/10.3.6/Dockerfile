@@ -2,6 +2,7 @@ FROM centos:7.6.1810
 
 LABEL MAINTAINER wise2c <admin@wise2c.com>
 
+# Modify Character Set and Time
 RUN yum update -y \
     && yum install -y kde-l10n-Chinese \
     && yum reinstall -y glibc-common \
@@ -17,21 +18,21 @@ ENV LANG=zh_CN.UTF-8 \
     FMW_PKG=wls1036_generic.jar \
     JAVA_HOME=/usr/java/default
 
+#install JDK
 ADD $JAVA_PKG /usr/java/
+RUN cd /usr/java/ \
+    && chmod +x /usr/java/$JAVA_PKG \
+    && sh $JAVA_PKG \
+    && rm $JAVA_PKG \
+    && export JAVA_DIR=$(ls -1 -d /usr/java/*) \
+    && ln -s $JAVA_DIR /usr/java/latest \
+    && ln -s $JAVA_DIR /usr/java/default \
+    && alternatives --install /usr/bin/java java $JAVA_DIR/bin/java 20000 \
+    && alternatives --install /usr/bin/javac javac $JAVA_DIR/bin/javac 20000 \
+    && alternatives --install /usr/bin/jar jar $JAVA_DIR/bin/jar 20000
 
-RUN cd /usr/java/ && \
-    chmod +x /usr/java/$JAVA_PKG && \
-    sh $JAVA_PKG && \
-    rm $JAVA_PKG && \
-    export JAVA_DIR=$(ls -1 -d /usr/java/*) && \
-    ln -s $JAVA_DIR /usr/java/latest && \
-    ln -s $JAVA_DIR /usr/java/default && \
-    alternatives --install /usr/bin/java java $JAVA_DIR/bin/java 20000 && \
-    alternatives --install /usr/bin/javac javac $JAVA_DIR/bin/javac 20000 && \
-    alternatives --install /usr/bin/jar jar $JAVA_DIR/bin/jar 20000
-
+#install Weblogic
 ADD $FMW_PKG container-scripts/* /
-
 RUN chmod +x /entrypoint.sh \
     && java -jar $FMW_PKG -mode=silent -silent_xml=/wls-silent.xml \
     && rm $FMW_PKG wls-silent.xml
