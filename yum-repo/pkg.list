@@ -1,4 +1,5 @@
-docker-ce-18.09.4-3
+docker
+docker-ce-18.09.4
 docker-python 
 docker-compose 
 python-chardet 
