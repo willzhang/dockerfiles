@@ -14,6 +14,7 @@ name=local
 baseurl=file:///root/rpms
 enabled=1
 gpgcheck=0
+EOF
 ```
 然后就可以直接用yum install命令命令安装相关软件了。例如：
 yum install docker docker-compose
