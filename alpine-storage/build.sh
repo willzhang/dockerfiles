@@ -1,1 +1,2 @@
-docker build -t willdockerhub/alpine-storage:3.9 .
+TAG=jdk1.7
+docker build -t willdockerhub/alpine-storage:$TAG .
