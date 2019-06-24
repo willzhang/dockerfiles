@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # define configfile env from wisecloud ui
-#if [ $CONFIG_FILE ]
-#then
-#  chmod +x $CONFIG_FILE && source $CONFIG_FILE
-#else
-#  echo "No env configuration file provided,skip!"
-#fi
+if [ $CONFIG_FILE ]
+then
+  chmod +x $CONFIG_FILE && source $CONFIG_FILE
+else
+  echo "No env configuration file provided,skip!"
+fi
 
 # create weblogic domain
 startfile="/root/Oracle/Middleware/user_projects/domains/base_domain/startWebLogic.sh"
