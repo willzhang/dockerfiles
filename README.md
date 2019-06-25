@@ -1,9 +1,6 @@
 # docker-images
 
-
-制作基础镜像
-
-weblogic12213
+## weblogic12213
 
 参考地址：
 
@@ -25,7 +22,7 @@ https://github.com/oracle/docker-images/blob/master/OracleWebLogic/samples/1221-
 
 
 
-ant1.7
+## ant
 
 官网
 
