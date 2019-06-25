@@ -1,1 +1,1 @@
-docker build -t willdockerhub/oracle-jdk:1.6 .
+docker build -t willdockerhub/oracle-jdk:1.7 .

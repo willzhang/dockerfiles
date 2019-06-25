@@ -1,5 +1,5 @@
 #get jdk-6u45-linux-x64.bin
-FROM willdockerhub/alpine-storage:3.9
+FROM willdockerhub/alpine-storage:jdk1.6
 
 FROM centos:7.6.1810
 
