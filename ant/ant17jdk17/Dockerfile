@@ -2,7 +2,19 @@ FROM willdockerhub/oracle-jdk:1.7
 
 MAINTAINER frekele <leandro.freitas@softdevelop.com.br>
 
-ENV ANT_VERSION=1.7.1
+# Modify Character Set and Time
+RUN yum update -y \
+    && yum install -y kde-l10n-Chinese \
+    && yum reinstall -y glibc-common \
+    && yum clean all && rm -rf /tmp/* rm -rf /var/cache/yum/* \
+    && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 \
+    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+ENV LANG=zh_CN.UTF-8 \
+    LANGUAGE=zh_CN:zh \
+    LC_ALL=zh_CN.UTF-8 \
+    LC_CTYPE=zh_CN.UTF-8 \
+    ANT_VERSION=1.7.1
 
 # change to tmp folder
 WORKDIR /tmp

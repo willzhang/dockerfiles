@@ -13,12 +13,11 @@ startfile="/root/Oracle/Middleware/user_projects/domains/base_domain/startWebLog
 
 if [ ! -f "$startfile" ] 
 then
-    wlst.sh -loadProperties domain.properties -skipWLSModuleScanning /root/Oracle/create-wls-domain.py
+    wlst.sh -skipWLSModuleScanning /root/Oracle/create-wls-domain.py
 fi
 
 # create datasource
-CONFIG_PATH=$(dirname "$CONFIG_FILE")
-DATASOURCE_PATH=$CONFIG_PATH/datasource/
+DATASOURCE_PATH=$(dirname "$CONFIG_FILE")/datasource/
 if [ -d "$DATASOURCE_PATH" ]
 then 
   for properties in $(ls $DATASOURCE_PATH)
@@ -30,9 +29,24 @@ else
   echo "No datasource.properties file provided,skip to create datasource!"
 fi
 
-#create jms
-wlst.sh /root/Oracle/jms-deploy.py
-
 # start weblogic
-/root/Oracle/Middleware/user_projects/domains/base_domain/startWebLogic.sh
+/root/Oracle/Middleware/user_projects/domains/base_domain/startWebLogic.sh &
 
+echo 'Waiting for Admin Server to reach RUNNING state'
+sleep 60s
+
+# create jms server
+JMS_PATH=$(dirname "$CONFIG_FILE")/jms/
+if [ -d "$JMS_PATH" ]
+then
+  for properties in $(ls $JMS_PATH)
+  do
+     cp $JMS_PATH$properties /root/Oracle/
+     wlst.sh -loadProperties $JMS_PATH$properties /root/Oracle/jms-deploy.py
+     echo "create jms $properties success!"
+  done
+else
+  echo "No jms.properties file provided,skip to create jms!"
+fi
+
+sleep infinity

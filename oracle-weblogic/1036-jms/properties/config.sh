@@ -3,7 +3,7 @@
 #export weblogic variable
 export ADMIN_NAME=AdminServer
 export DOMAIN_HOME=/root/Oracle/Middleware/user_projects/domains/base_domain/
-export ADMIN_URL=t3://127.0.0.1:7001
+export ADMIN_URL=t3://0.0.0.0:7001
 export ADMIN_USERNAME=weblogic
 export ADMIN_PASSWORD=88888888
 export LISTEN_ADDRESS=0.0.0.0
