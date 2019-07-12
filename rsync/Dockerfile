@@ -5,5 +5,5 @@ RUN apk update \
  && apk add --no-cache \
             rsync \
             openssh-client \
-            tcl tclx tcl-dev expect \
+            expect \
  && rm -rf /var/cache/apk/*
