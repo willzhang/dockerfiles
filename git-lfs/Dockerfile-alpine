@@ -1,0 +1,12 @@
+FROM alpine
+
+LABEL maintainer will <willzhmail@gmail.com>
+
+RUN apk --update --no-cache add git openssh-client git-lfs bash && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/cache/apk/*
+
+VOLUME /git
+WORKDIR /git
+
+CMD [ "/usr/bin/git" ]
