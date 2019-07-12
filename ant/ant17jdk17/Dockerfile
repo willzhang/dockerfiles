@@ -15,6 +15,7 @@ ENV LANG=zh_CN.GB18030 \
     LC_ALL=zh_CN.GB18030 \
     LC_CTYPE=zh_CN.GB18030 \
     ANT_VERSION=1.7.1
+    ANT_HOME=/opt/ant
 
 # change to tmp folder
 WORKDIR /tmp
