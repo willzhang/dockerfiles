@@ -7,13 +7,13 @@ RUN yum update -y \
     && yum install -y kde-l10n-Chinese \
     && yum reinstall -y glibc-common \
     && yum clean all && rm -rf /tmp/* rm -rf /var/cache/yum/* \
-    && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 \
+    && localedef -c -f GB18030 -i zh_CN zh_CN.GB18030 \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-ENV LANG=zh_CN.UTF-8 \
+ENV LANG=zh_CN.GB18030 \
     LANGUAGE=zh_CN:zh \
-    LC_ALL=zh_CN.UTF-8 \
-    LC_CTYPE=zh_CN.UTF-8 \
+    LC_ALL=zh_CN.GB18030 \
+    LC_CTYPE=zh_CN.GB18030 \
     ANT_VERSION=1.7.1
 
 # change to tmp folder
