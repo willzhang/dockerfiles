@@ -10,3 +10,7 @@ expect {
 }
 interact
 ```
+
+
+chmod +x expect.sh
+./expect.sh
