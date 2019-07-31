@@ -4,4 +4,4 @@ docker run -itd \
     --name git-sync \
     -e GIT_SYNC_REPO=git@github.com:willzhang/shell.git \
     -e GIT_SYNC_SSH=true \
-    git-sync:v3.1.1
+    willdockerhub/git-sync:v3.1.1

@@ -1,0 +1,34 @@
+FROM oracle-jdk:1.6
+
+LABEL MAINTAINER wise2c <admin@wise2c.com>
+
+USER root
+
+# Modify Character Set and Time
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && yum -y install kde-l10n-Chinese \
+    && yum -y reinstall glibc-common \
+    && localedef -c -f GB18030 -i zh_CN zh_CN.GB18030 \
+    && echo 'LANG="zh_CN.GB18030"' > /etc/locale.conf \
+    && source /etc/locale.conf \
+    && yum clean all
+
+ENV LANG=zh_CN.GB18030 \ 
+    LC_ALL=zh_CN.GB18030 \
+    FMW_PKG=wls1036_generic.jar
+
+#install Weblogic
+COPY $FMW_PKG container-scripts/entrypoint.sh container-scripts/wls-silent.xml /root/
+COPY container-scripts/create-wls-domain.py container-scripts/ds-deploy.py /root/Oracle/
+
+RUN java -jar /root/$FMW_PKG -mode=silent -silent_xml=/root/wls-silent.xml \
+    && rm /root/$FMW_PKG /root/wls-silent.xml \
+    && chmod +x /root/entrypoint.sh
+
+ENV DOMIAN_HOME=/root/Oracle/Middleware/user_projects/domains/base_domain \
+    PATH=$PATH:$JAVA_HOME/bin:/root/Oracle/Middleware/wlserver_10.3/common/bin:$DOMAIN_HOME/bin \
+    CONFIG_JVM_ARGS='-Djava.security.egd=file:/dev/./urandom'
+
+WORKDIR /root/Oracle/Middleware
+
+CMD source /root/entrypoint.sh
