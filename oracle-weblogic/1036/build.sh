@@ -1,1 +1,1 @@
-docker build -t weblogic:10.3.6-test .
+docker build -f Dockerfile.gb18030 -t weblogic:1036-gb18030 .
