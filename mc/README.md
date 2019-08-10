@@ -7,5 +7,8 @@ docker run -itd --name mclauncher \
 	willdockerhub/mclauncher
 ```
 
-浏览器访问http://<your-ip>:6080
+浏览器访问
+```
+http://<your-ip>:6080
 选择Games--Minecraft Launcher
+```
