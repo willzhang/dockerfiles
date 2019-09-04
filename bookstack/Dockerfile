@@ -28,4 +28,4 @@ RUN chmod +x /entrypoint.sh
 WORKDIR /opt/bookstack/
 EXPOSE 8181
 
-ENTRYPOINT [ /entrypoint.sh ]
+ENTRYPOINT [ "/entrypoint.sh" ]
