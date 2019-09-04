@@ -14,7 +14,7 @@ RUN yum install -y wget \
   && rm -rf 2019-08-18.BookStack.V2.0_Linux_amd64.zip \
   && yum clean all
 
-COPY ./conf/ /opt/bookstack/conf
+COPY ./conf/ /opt/bookstack/conf/
 
 EXPOSE 8181
 
