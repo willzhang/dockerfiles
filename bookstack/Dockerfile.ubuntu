@@ -22,7 +22,7 @@ RUN apt-get update -qqy \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
   && apt-get clean
 
-COPY entrypoint.sh /
+COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /opt/bookstack/
