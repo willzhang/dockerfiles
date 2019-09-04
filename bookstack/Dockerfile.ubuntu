@@ -5,6 +5,7 @@ ENV BOOKSTACK_VER=v2.0 \
 
 RUN apt-get update -qqy \
   && apt-get install -y ttf-wqy-zenhei fonts-wqy-microhei \
+  && apt-get install -y wget unzip git \
   ###install calibre
   && apt-get install -y calibre \
   ###install google-chrome
@@ -22,7 +23,7 @@ RUN apt-get update -qqy \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
   && apt-get clean
 
-COPY ./entrypoint.sh /
+COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /opt/bookstack/
