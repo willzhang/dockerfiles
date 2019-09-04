@@ -1,0 +1,10 @@
+FROM centos
+
+RUN yum install -y wget \
+  && mkdir -p /opt/bookstack/ \
+  && wget -P /opt/bookstack/ https://github.com/TruthHun/BookStack/releases/download/v2.0/2019-08-18.BookStack.V2.0_Linux_amd64.zip \
+  && cd /opt/bookstack/ \
+  && yum install -y unzip \
+  && unzip 2019-08-18.BookStack.V2.0_Linux_amd64.zip
+
+COPY ./conf/* /opt/bookstack/conf/
