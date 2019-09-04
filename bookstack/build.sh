@@ -1,1 +1,1 @@
-docker build -t willdockerhub/bookstack --no-cache .
+docker build -t willdockerhub/bookstack .
