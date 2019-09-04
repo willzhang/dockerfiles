@@ -11,13 +11,13 @@ RUN apt-get update -qqy \
   && rm -rf linux-installer.py \
 
   #install google-chrome
-  && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \ 
   && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
   && apt-get -qqy install google-chrome-stable \
   && rm /etc/apt/sources.list.d/google-chrome.list \
 
   #download bookstack  
-  && mkdir -p /opt/bookstack/ \
+  && mkdir /opt/bookstack/ \
   && wget -P /opt/bookstack/ https://github.com/TruthHun/BookStack/releases/download/v2.0/2019-08-18.BookStack.V2.0_Linux_amd64.zip \
   && cd /opt/bookstack/ \
   && unzip 2019-08-18.BookStack.V2.0_Linux_amd64.zip \
@@ -25,7 +25,6 @@ RUN apt-get update -qqy \
   && rm -rf 2019-08-18.BookStack.V2.0_Linux_amd64.zip \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-COPY conf/* /opt/bookstack/conf/
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
