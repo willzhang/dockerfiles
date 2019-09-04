@@ -1,14 +1,15 @@
-FROM centos
+FROM ubuntu
 
 RUN apt-get install wget \
   && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()" \
   && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+ 
   && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
   && apt-get update -qqy \
   && apt-get -qqy install google-chrome-stable \
   && rm /etc/apt/sources.list.d/google-chrome.list \
   
-  && mkdir -p /opt/bookstack/ \
+  && mkdir /opt/bookstack/ \
   && wget -P /opt/bookstack/ https://github.com/TruthHun/BookStack/releases/download/v2.0/2019-08-18.BookStack.V2.0_Linux_amd64.zip \
   && cd /opt/bookstack/ \
   && apt-get install unzip \
@@ -18,7 +19,7 @@ RUN apt-get install wget \
   && rm -rf 2019-08-18.BookStack.V2.0_Linux_amd64.zip \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
 
-COPY ./conf/ /opt/bookstack/conf
+COPY ./conf/* /opt/bookstack/conf
 
 EXPOSE 8181
 
