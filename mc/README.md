@@ -10,7 +10,9 @@ docker run -itd --name mclauncher \
 ```
 
 ## open browers
+```
 http://<your-ip>:6080
+```
 
 choose:
 Games--Minecraft Launcher
