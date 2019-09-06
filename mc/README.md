@@ -1,4 +1,4 @@
-just for online, not for play
+just for online, not for play!
 
 ## usage
 ```
