@@ -1,3 +1,5 @@
+just for online, not for play
+
 ## usage
 ```
 docker run -itd --name mclauncher \
@@ -7,8 +9,11 @@ docker run -itd --name mclauncher \
   willdockerhub/mclauncher
 ```
 
-浏览器访问
-```
+## open browers
 http://<your-ip>:6080
-选择Games--Minecraft Launcher
-```
+
+choose:
+Games--Minecraft Launcher
+
+or use vnc connect 5900 port.
+
