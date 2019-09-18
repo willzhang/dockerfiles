@@ -1,2 +1,2 @@
-docker build -t willdockerhub/vagrant:centos
-#docker build -t willdockerhub/vagrant:ubuntu
+docker build -t willdockerhub/vagrant-box:centos .
+#docker build -t willdockerhub/vagrant-box:ubuntu .
