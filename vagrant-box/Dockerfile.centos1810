@@ -1,3 +1,0 @@
-FROM busybox
-RUN wget https://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7.box \
-    && mv *.box centos1810.box
