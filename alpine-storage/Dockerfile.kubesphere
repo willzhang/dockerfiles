@@ -1,0 +1,4 @@
+FROM appropriate/curl
+
+RUN mkdir /storage \
+    && curl -L https://kubesphere.io/download/offline/advanced-2.0.2 > /storage/advanced-2.0.2.tar.gz
