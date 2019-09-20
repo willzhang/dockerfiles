@@ -1,0 +1,2 @@
+FROM busybox
+RUN wget https://cloud-images.ubuntu.com/disco/current/disco-server-cloudimg-amd64-vagrant.box

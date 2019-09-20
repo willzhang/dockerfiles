@@ -21,11 +21,10 @@ RUN yum install -y wget unzip git \
   && rm -rf ${BOOKSTACK_PKG} \
   && yum clean all
 
-COPY entrypoint.sh /
-
+COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /opt/bookstack/
 EXPOSE 8181
 
-ENTRYPOINT [ /entrypoint.sh ]
+ENTRYPOINT [ "/entrypoint.sh" ]
