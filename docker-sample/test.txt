@@ -1,0 +1,20 @@
+Web应用打包
+# ls sample/
+index.jsp  META-INF  WEB-INF
+# jar -cvf sample.war -C ./sample .
+
+
+
+创建domain.properties
+# cat /data/properties/domain.properties 
+username=weblogic
+password=welcome1
+
+运行应用容器
+docker run -it -d --name sample-app \
+        -p 7001:7001 \
+        -e PRODUCTION_MODE=dev \
+        -e ADMINISTRATION_PORT_ENABLED=false \
+        -v /data/properties:/u01/oracle/properties \
+        sample-app:v1.0
+
