@@ -1,2 +1,3 @@
 FROM busybox
-RUN wget https://cloud-images.ubuntu.com/disco/current/disco-server-cloudimg-amd64-vagrant.box
+RUN mkdir /vagrant/ \
+    && wget -P https://cloud-images.ubuntu.com/disco/current/disco-server-cloudimg-amd64-vagrant.box

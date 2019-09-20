@@ -1,2 +1,2 @@
 FROM busybox
-RUN wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64-vagrant.box
+ADD https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64-vagrant.box /vagrant/
