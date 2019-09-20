@@ -1,0 +1,10 @@
+FROM busybox
+
+ENV VBOX_URL=https://download.virtualbox.org/virtualbox
+
+RUN VAGRANT_VERSION=$(wget -q -O - https://releases.hashicorp.com/vagrant | grep vagrant | head -1 | awk -F/ '{print $3}') \
+    && mkdir /vagrant/ \
+    && wget -P /vagrant/ https://releases.hashicorp.com/vagrant/${VAGRANT_VERSION}/vagrant_${VAGRANT_VERSION}_x86_64.msi \
+    && VBOX_VERSION=$(wget -q -O - ${VBOX_URL} | grep [0-9]'\+'.[0-9]'\+'.[0-9]'\+'/ | tail -n 1 | awk -F "[\"\"]" '{print $2}' | awk -F/ '{print $1}') \
+    && VBOX_PACKAGE=$(wget -q -O - https://download.virtualbox.org/virtualbox/${VBOX_VERSION} | grep exe | awk -F "[\"\"]" '{print $2}') \
+    && wget -P /vagrant/ https://download.virtualbox.org/virtualbox/${VBOX_VERSION}/${VBOX_PACKAGE}
