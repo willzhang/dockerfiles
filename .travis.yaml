@@ -1,8 +1,0 @@
-services:
- - docker
- 
-install:
- - docker build -t wildockerhub/bookstack .
- 
-script:
- - docker push wildockerhub/bookstack
