@@ -1,0 +1,24 @@
+FROM centos:7.6.1810                                                              
+       
+RUN yum install kde-l10n-Chinese glibc-common -y \
+    && localedef -c -f UTF-8 -i zh_CN zh_CN.utf8 \
+	&& yum install -y screen wget java-1.8.0-openjdk* \
+	&& mkdir -p /{server,jar,sh}
+	
+ENV LC_ALL zh_CN.UTF-8 \
+    MC_PACKAGE=spigot1.14.4.jar
+
+ADD ${MC_PACKAGE} /jar
+
+ADD start.sh back.sh run.sh /sh
+
+RUN chmod -x /sh/run.sh \
+    && chmod -x /sh/start.sh \
+    && chmod -x /sh/back.sh \
+    && ln -s /sh/run.sh /usr/bin/run \
+    && ln -s /sh/back.sh /usr/bin/back \
+    && echo eula=true > eula.txt
+
+WORKDIR /server
+                                                               
+EXPOSE 25565
