@@ -5,6 +5,7 @@ just for online, not for play!
 docker run -itd --name mclauncher \
   --restart always \
   -p 6080:80 \
+  -m 2G \
   -p 5900:5900 \
   willdockerhub/mclauncher
 ```
