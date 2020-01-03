@@ -20,8 +20,7 @@ ENV LANG=zh_CN.GB18030 \
 WORKDIR /tmp
 
 # Download and extract apache ant to opt folder
-RUN yum install -y wget \
-    && wget --no-check-certificate --no-cookies https://archive.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz \
+RUN curl -Lo apache-ant-${ANT_VERSION}-bin.tar.gz https://archive.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz \
     && tar -zvxf apache-ant-${ANT_VERSION}-bin.tar.gz -C /opt/ \
     && ln -s /opt/apache-ant-${ANT_VERSION} /opt/ant \
     && rm -f apache-ant-${ANT_VERSION}-bin.tar.gz
