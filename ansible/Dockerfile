@@ -2,6 +2,7 @@ FROM nginx:1.17.6-alpine
 ENV LANG=C.UTF-8
 
 RUN apk add --no-cache \
+        vim \
         git \
         bash \
         rsync \
