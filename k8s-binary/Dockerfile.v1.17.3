@@ -1,0 +1,9 @@
+FROM alpine
+
+ENV kubernetes_version=v1.17.3
+
+WORKDIR /k8s/
+RUN apk add --update curl && rm -rf /var/cache/apk/* \
+	&& curl -LO https://storage.googleapis.com/kubernetes-release/release/${kubernetes_version}/kubernetes-client-linux-amd64.tar.gz \
+	&& curl -LO https://storage.googleapis.com/kubernetes-release/release/${kubernetes_version}/kubernetes-server-linux-amd64.tar.gz \
+	&& curl -LO https://storage.googleapis.com/kubernetes-release/release/${kubernetes_version}/kubernetes-node-linux-amd64.tar.gz
