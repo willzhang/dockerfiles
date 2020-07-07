@@ -1,4 +1,4 @@
-FROM registry.cn-shenzhen.aliyuncs.com/kollaimage/centos-binary-openstack-base:train
+FROM kolla/centos-binary-openstack-base:train
 
 RUN yum install -y python-devel libffi-devel gcc openssl-devel libselinux-python \
     && yum install -y ansible \
