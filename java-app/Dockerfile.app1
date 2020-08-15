@@ -1,9 +1,9 @@
-FROM 192.168.1.1/dev5/java:8
-MAINTAINER admin@gmail.com
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ARG JAR_FILE=target/application.jar
+COPY ${JAR_FILE} app.jar
 
-RUN mkdir /apps
-ADD ./target/*.jar /apps/app.jar
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo "Asia/Shanghai" > /etc/timezone
 
-CMD ["java","-jar","/apps/app.jar","--spring.profiles.active-dat","-Xms4094M","-Xmx4096M"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
