@@ -1,16 +1,17 @@
-just for online, not for play!
+## mclauncher
+minecraft client launcher in docker with vnc,just for online, not for play!
 
-## usage
+## run container
 ```
-docker run -itd --name mclauncher \
+docker run -d --name mclauncher \
   --restart always \
   -p 6080:80 \
-  -m 2G \
   -p 5900:5900 \
+  -m 2G \
   willdockerhub/mclauncher
 ```
 
-## open browers
+## connect with browers or vnc
 ```
 http://<your-ip>:6080
 ```
