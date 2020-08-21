@@ -7,6 +7,7 @@ docker run -d --name mclauncher \
   --restart always \
   -p 6080:80 \
   -p 5900:5900 \
+  -e VNC_PASSWORD=password \
   -m 2G \
   willdockerhub/mclauncher
 ```
