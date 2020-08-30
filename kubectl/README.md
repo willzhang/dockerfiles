@@ -1,4 +1,13 @@
-## Running commands
+## What is Kubectl?
+
+Kubectl is the Kubernetes command line interface.
+
+## Supported tags and respective Dockerfile links
+
+[latest](https://github.com/willzhang/docker-images/blob/master/kubectl/Dockerfile)
+
+
+## How to use this image
 
 ```
 docker run -it --rm willdockerhub/kubectl
