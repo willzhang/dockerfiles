@@ -6,7 +6,7 @@ Kubectl is the Kubernetes command line interface.
 
 based with alpine:latest
 
-[latest](https://github.com/willzhang/docker-images/blob/master/kubectl/Dockerfile)
+* [latest](https://github.com/willzhang/docker-images/blob/master/kubectl/Dockerfile)
 
 
 ## How to use this image
