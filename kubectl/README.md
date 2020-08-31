@@ -4,7 +4,7 @@ Kubectl is the Kubernetes command line interface.
 
 ## Supported tags and respective Dockerfile links
 
-based on alpine:latest
+based on `alpine:latest`
 
 * [latest](https://github.com/willzhang/docker-images/blob/master/kubectl/Dockerfile)
 
