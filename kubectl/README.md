@@ -1,10 +1,9 @@
-## What is Kubectl?
+## what is this image
 
-Kubectl is the Kubernetes command line interface.
+latest verison kubectl and helm based on alpine:latest
 
 ## Supported tags and respective Dockerfile links
 
-based on `alpine:latest`
 
 * [latest](https://github.com/willzhang/docker-images/blob/master/kubectl/Dockerfile)
 
