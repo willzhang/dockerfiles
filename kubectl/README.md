@@ -1,6 +1,6 @@
 ## what is this image
 
-latest verison kubectl and helm based on alpine:latest
+latest verison kubectl based on alpine:latest
 
 ## Supported tags and respective Dockerfile links
 
