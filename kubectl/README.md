@@ -11,9 +11,9 @@ latest verison kubectl based on alpine:latest
 ## How to use this image
 
 ```
-docker run -it --rm willdockerhub/kubectl
 docker run -it --rm willdockerhub/kubectl --help
 docker run -it --rm willdockerhub/kubectl version
+docker run -it --rm --entrypoint="" willdockerhub/kubectl sh
 ```
 
 ## Loading your own configuration
