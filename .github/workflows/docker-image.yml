@@ -1,0 +1,64 @@
+# This workflow will pull kolla ansible docker images from dockerhub, push it to aliyun container registry.
+#
+# To configure this workflow:
+#
+# 1. Set up secrets in your workspace: 
+#    - ALIYUN_USERNAME with aliyun registry username
+#    - ALIYUN_PASSWORD with aliyun registry password
+#
+# 2. Change the values for the ALIYUN_REGISTRY, ALIYUN_NAMESPACE  environment variables (below).
+
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  DOCKERHUB_USERNAME: willdockerhub
+  ALI_USERNAME: willzhmic@outlook.com
+  ALI_REGISTRY_URL: registry.cn-shenzhen.aliyuncs.com
+  ALI_REGISTRY_NAMESPACE: images_mirror
+
+jobs:
+  get-kolla-images:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Log into aliyun registry
+    - name: Log into aliyun registry
+      run: |
+	     echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login $ALIYUN_REGISTRY -u ${{ secrets.ALIYUN_USERNAME }} --password-stdin
+	     echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u ${{ secrets.DOCKERHUB_PASSWORD }} --password-stdin 
+
+    # get images list
+    - name: get images list
+      run: |
+        echo "start pull retag and push"
+        count=$(cat images.txt | wc -l)
+        icount=1
+        for image in `cat images.txt`
+        do
+          echo [$icount/$count]: $image
+          image_name=${image##*/}
+          docker pull $image
+          docker tag $image $DOCKERHUB_USERNAME/$image_name
+          docker tag $image $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
+          
+          # push to dockerhub
+          docker push $DOCKERHUB_USERNAME/$image_name
+          
+          # push to aliyun registry
+          docker push $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
+          ((icount++))
+        done	  
+		
+    # pull and push images
+    - name: list images
+      run: |
+        docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALI_REGISTRY_URL
+        docker images --format "{{.Repository}}:{{.Tag}}" | grep $DOCKERHUB_USERNAME
