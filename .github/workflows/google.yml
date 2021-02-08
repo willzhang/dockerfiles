@@ -1,0 +1,27 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+
+  schedule:
+    - cron: "* * * * 0"
+
+env:
+  DOCKERHUB_USERNAME: willdockerhub
+
+jobs:
+  build docker images:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: login
+      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u ${{ secrets.DOCKERHUB_PASSWORD }} --password-stdin 
+
+    - name: build and push
+      run: |
+        docker build -t willdockerhub/you-get:latest -f you-get/Dockerfile
+        docker push willdockerhub/you-get:latest
