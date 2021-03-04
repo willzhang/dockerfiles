@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+  web:
+    image: willdockerhub/django:blog_prod
+    container_name: blog
+    restart: always
+    expose:
+      - "8000"
+    environment:
+      - DJANGO_DEBUG=False
+      - SQL_ENGINE=django.db.backends.mysql
+      - SQL_DATABASE=blog
+      - SQL_USER=blog
+      - SQL_PASSWORD=blog123
+      - SQL_HOST=db
+      - SQL_PORT=3306    
+    volumes:
+      - nginx_volume:/etc/nginx/conf.d
+      - static_volume:/home/app/web/collected_static
+      - media_volume:/home/app/web/media
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0.23
+    container_name: mysql_db
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - "mysql_data:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=blog
+      - MYSQL_USER=blog
+      - MYSQL_PASSWORD=blog123
+
+  nginx:
+    image: nginx:1.19.7
+    container_name: django-nginx
+    restart: always
+    ports:
+      - 8000:80
+    volumes:
+      - nginx_volume:/etc/nginx/conf.d
+      - static_volume:/home/app/web/collected_static
+      - media_volume:/home/app/web/media
+    depends_on:
+      - web
+
+volumes:
+  nginx_volume:
+  mysql_data:
+  static_volume:
+  media_volume:
