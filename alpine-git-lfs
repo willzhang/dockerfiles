@@ -1,0 +1,8 @@
+FROM alpine/git:latest
+
+ENV GIT_LFS_VERSION="v3.4.0"
+
+RUN wget -qO- https://github.com/git-lfs/git-lfs/releases/download/${GIT_LFS_VERSION}/git-lfs-linux-amd64-${GIT_LFS_VERSION}.tar.gz | tar -xz \
+    && mv git-lfs-${GIT_LFS_VERSION}/git-lfs /usr/local/bin/ \
+    && git lfs install --skip-smudge \
+    && rm -f git-lfs-${GIT_LFS_VERSION}
